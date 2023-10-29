@@ -1,0 +1,25 @@
+<form method="post" action="/">
+    <select name="crypto1">
+        <option value="BTC">BTC</option>   
+        <option value="ETH">ETH</option>
+        <option value="SOL">SOL</option>
+        <option value="USDT">USDT</option>
+    </select>
+    <select name="crypto2">
+        <option value="BTC">BTC</option>   
+        <option value="ETH">ETH</option>
+        <option value="SOL">SOL</option>
+        <option value="USDT">USDT</option>
+    </select>
+    <button type="submit">Check</button>
+</form>
+
+<% if (locals.result) { %>
+
+<h1><%=result.price%></h1>
+
+<% } else if (locals.h1) { %>
+    <%= h1 %>
+    <% } else {%>
+        <%= locals.error %>
+        <% } %>
