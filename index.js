@@ -4,7 +4,7 @@ import axios from "axios";
 const app = express();
 const port = 3000;
 const APIPrice24 = "https://data-api.binance.vision/api/v3/ticker/24hr?symbol="
-const allCryptos = ["BTC", "ETH", "BNB", "XRP", "SOL", "ADA", "DOGE", "TRX", "ARB", "LINK", "MATIC", "DOT", "LTC", "BCH", "SHIB", "AVAX", "INJ", "XLM", "XMR", "ATOM", "OP", "UNI", "ICP", "FIL", "HBAR", "APT", "NEAR", "VET"];
+const allCryptos = ["BTC", "ETH", "BNB", "XRP", "SOL", "ADA", "DOGE", "TRX", "OP", "LINK", "MATIC", "DOT", "LTC", "BCH", "SHIB", "AVAX", "ARB", "XLM", "XMR", "ATOM", "NEAR", "UNI", "ICP", "FIL", "HBAR", "APT", "INJ", "VET"];
 const toCompareCrypto = ["USDT", "BTC", "ETH"];
 
 app.use(express.static("public"));

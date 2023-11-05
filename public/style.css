@@ -110,4 +110,12 @@ img {
     margin-left: 10px;
 }
 
+footer p {
+    text-align: end;
+    margin-right: 15px;
+}
 
+h2#title {
+    text-align: left;
+    color: aqua;
+}
