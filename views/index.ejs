@@ -1,25 +1,63 @@
-<form method="post" action="/">
-    <select name="crypto1">
-        <option value="BTC">BTC</option>   
-        <option value="ETH">ETH</option>
-        <option value="SOL">SOL</option>
-        <option value="USDT">USDT</option>
-    </select>
-    <select name="crypto2">
-        <option value="BTC">BTC</option>   
-        <option value="ETH">ETH</option>
-        <option value="SOL">SOL</option>
-        <option value="USDT">USDT</option>
-    </select>
-    <button type="submit">Check</button>
-</form>
+<link rel="stylesheet" href="/style.css">
 
+
+<div class="flex">
 <% if (locals.result) { %>
 
-<h1><%=result.price%></h1>
+<h1>The price of <span class="crypto1"><%=crypto1%></span> against <span class="crypto2"><%=crypto2%></span> is:</h2>
 
-<% } else if (locals.h1) { %>
-    <%= h1 %>
     <% } else {%>
-        <%= locals.error %>
+        <h1>Please, select two cryptos to check their actual price</h1>
         <% } %>
+
+        <% if (locals.result) { %>
+            <% if (result.weightedAvgPrice > result.prevClosePrice) { %>
+                <h2 id="price">⇧<%=result.weightedAvgPrice%></h2>
+            <script> document.getElementById("price").classList.add("green") </script>
+                <p class="price-description">↑ If you have this asset, you are lucky, it seems it is going up ↑</p>
+            <%} else if (result.weightedAvgPrice < result.prevClosePrice) { %>
+                <h2 id="price">⇩<%=result.weightedAvgPrice%></h2>
+            <script> document.getElementById("price").classList.add("red") </script>
+                <p class="price-description">↓ I hope you don't have this asset because it seems it is going up ↓</p>
+                            <%} else { %>
+                <h2 id="price">▶<%=result.weightedAvgPrice%></h2>
+                <p class="price-description"> If I was you, I would buy the lottery because this asset has the exact same price as 24 hours ago!</p>
+            <%}%>
+
+<% } else if (locals.h2) { %>
+    <h2><%= h2 %></h2>
+    <% } else {%>
+        <h2><%= locals.error %></h2>
+        <% } %>
+    
+
+    <form method="post" action="/">
+    <div class="text">
+    <p>Please note: Not all pairs are available. If you choose two cryptos which pair is not available, an error message will appear.
+    </p>
+    <p>The first value is called "base asset" which represents the asset being bought and sold. The second asset represents the asset being used to quote prices. This means the first asset will represent the "quantity" (which is determine as 1), and the second represents the actual price.
+    </p>
+    </div>
+    <div class="options">
+    <select name="crypto1" id="select1">
+        <% for (let x=0; x<allCryptos.length; x++) { %>
+            <option value="<%=allCryptos[x]%>"><%=allCryptos[x]%></option>
+            <%}%>
+    </select>
+    <select name="crypto2" id="select2">
+        <% for (let x=0; x<toCompareCrypto.length; x++) { %>
+            <option value="<%=toCompareCrypto[x]%>"><%=toCompareCrypto[x]%></option>
+            <%}%>
+    </select>
+    <button type="submit">Check Price</button>
+    <%if (locals.result) { %>
+        <div class="compare">
+            <img id="image1" src="/images/<%=crypto1%>.png">
+            <img id="image2" src="/images/<%=crypto2%>.png">
+        </div>
+    <%}%>
+    </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
